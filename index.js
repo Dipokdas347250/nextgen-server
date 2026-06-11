@@ -49,7 +49,7 @@ app.post(
           .status(400)
           .json({
             message:
-              "সব field পূরণ করুন",
+              "Fill in all fields.",
           });
       }
 
@@ -126,6 +126,22 @@ app.post(
     }
   }
 );
+// Get All Contacts API
+app.get("/api/contact", async (req, res) => {
+  try {
+    const contacts = await Contact.find().sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      data: contacts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
 
 const PORT =
   process.env.PORT || 5000;
