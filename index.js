@@ -9,8 +9,6 @@ dotenv.config();
 const Contact = require("./models/contact");
 
 const app = express();
-
-// Middleware
 app.use(cors());
 app.use(express.json());
 
