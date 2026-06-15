@@ -62,56 +62,6 @@ app.post(
 
       await newContact.save();
 
-      // Email Sender
-      const transporter =
-        nodemailer.createTransport(
-          {
-            service:
-              "gmail",
-            auth: {
-              user:
-                process
-                  .env
-                  .EMAIL_USER,
-              pass:
-                process
-                  .env
-                  .EMAIL_PASS,
-            },
-          }
-        );
-
-      // Send Email
-      await transporter.sendMail({
-        from:
-          process.env
-            .EMAIL_USER,
-
-        to: process.env
-          .EMAIL_USER,
-
-        subject:
-          "New Contact Form Submission",
-
-        html: `
-        <div style="font-family:sans-serif;padding:20px">
-        
-        <h2 style="color:#0a66c2">
-        New Contact Message
-        </h2>
-
-        <p><strong>Name:</strong> ${name}</p>
-
-        <p><strong>Email:</strong> ${email}</p>
-
-        <p><strong>Phone:</strong> ${phone}</p>
-
-        <p><strong>Message:</strong> ${message}</p>
-
-        </div>
-        `,
-      });
-
       res.status(201).json({
         message:
           "Message sent successfully",
